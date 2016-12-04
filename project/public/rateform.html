@@ -1,0 +1,22 @@
+<html>
+<head>
+<script>
+function check() {
+    var x = document.forms["rateForm"]["rate"].value;
+    if (x < 0||x >10) {
+        alert("rate score is limited in 0 to 10");
+        return false;
+    }
+}
+</script>
+</head>
+<body>
+
+<form name="rateForm" action="/rate"
+onsubmit="return check()" method="post">
+rate(1-10): <input type="value" name="rate">
+<input type="submit" value="Submit">
+</form>
+
+</body>
+</html>

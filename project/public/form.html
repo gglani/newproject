@@ -1,0 +1,23 @@
+<html>
+<head></head>
+<body>
+	<form ref='uploadForm' 
+		id='uploadForm' 
+		action='/create' 
+		method='post' 
+		encType="multipart/form-data">
+
+		Name:<input type='text' name='name' /><br/>
+		Borough:<input type='text' name='borough' /><br/>
+		Cuisine:<input type='text' name='cuisine' /><br/>
+		Street:<input type='text' name='street' /><br/>
+		Building:<input type='text' name='building' /><br/>
+		Zipcode:<input type='number' name='zipcode' /><br/>
+		GPS lon.:<input type='number' name='gpslon' /><br/>
+		GPS lat.:<input type='number' name='gpslat' /><br/>
+		Photo:<input type='file' name='sampleFile' /><br/>
+		      
+		<input type='submit' value='submit'>
+	</form>
+</body>
+</html>

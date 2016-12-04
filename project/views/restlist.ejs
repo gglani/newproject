@@ -1,0 +1,14 @@
+<html>
+  <head><title>Restaurant List</title></head>
+  <body>
+    <h1>List of Restaurant</h1>
+    <a href="form.html">New</a>
+    <ol>
+    <% for(var i = 0; i < rest.length; i++){ %>
+      <li><a href="/showdetails?name=<%= rest[i].name %>&_id=<%= rest[i]._id%>"><%= rest[i].name %></a></li>
+    <% } %>
+    </ol>
+	
+   
+  </body>
+</html>

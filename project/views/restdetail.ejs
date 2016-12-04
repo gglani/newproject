@@ -1,0 +1,44 @@
+<html>
+  <head>
+    <title>Google Map Example</title>
+    <link rel="stylesheet" type="text/css" href="layout.css">
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp
+        &key=AIzaSyBN_haQLBRW33ZZsWhui4-ZylMN0mv9plU"></script>
+    <script type="text/javascript">
+      var loadMap = function(){
+        var myLatLng = new google.maps.LatLng({lat: <%= coordX %>, lng: <%= coordY %>});
+        var map = new google.maps.Map(document.getElementById("map"),{
+          zoom: 18, center: myLatLng
+        }); 
+        var map = new google.maps.Marker({
+          position: myLatLng, map: map, title: '<%=name%>'
+        });
+      };
+      window.onload= loadMap;
+    </script>
+  </head>
+  <body>
+    <h1><%= name %></h1>
+    <section>
+	<a href="/read">Back</a>
+      <a href="/change?_id=<%= _id %>">Edit</a>
+      <a href="/delete?_id=<%= _id%>"> Delete </a>
+      <a href="/rate?_id=<%=_id%>">Rate</a>
+      <p>Borough: <%=borough%></p>
+      <p>Cuisine: <%=cuisine%></p>
+      <p>Street: <%=street%></p>
+      <p>Building: <%=building%></p>
+      <p>Zipcode: <%=zipcode%></p>
+      <p>Rate:</p>
+      <ol>
+      <%for(var i = 0; i<rates.length;i++){%>		`
+	 <li>name:<%= rates[i].rate_name%>rate:(<%= rates[i].rate%>)<% } 
+      %>	 
+      </ol>
+      <img src="<%= photo%>"/>
+    </section>
+    <aside>
+      <div id="map" style="width:500px;height:500px;">
+    </aside>
+  </body>
+</html>

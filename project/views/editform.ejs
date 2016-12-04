@@ -1,0 +1,23 @@
+<html>
+<head></head>
+<body>
+	<form ref='updateForm' 
+		id='updateForm' 
+		action='/change' 
+		method='post' 
+		encType="multipart/form-data">
+
+		Name:<input type='text' name='name' value='<%=name%>'/> <br/>
+		Borough:<input type='text' name='borough' value='<%=borough%>'/><br/>
+		Cuisine:<input type='text' name='cuisine' value='<%=cuisine%>'/><br/>
+		Street:<input type='text' name='street' value='<%=street%>'/><br/>
+		Building:<input type='text' name='building' value='<%=building%>'/><br/>
+		Zipcode:<input type='number' name='zipcode' value='<%=zipcode%>'/><br/>
+		GPS lon.:<input type='number' name='gpslon' value='<%=coordX%>'/><br/>
+		GPS lat.:<input type='number' name='gpslat' value='<%=coordY%>'/><br/>
+		Photo:<input type='file' name='sampleFile' /'><br/>
+		      
+		<input type='submit' value='update'>
+	</form>
+</body>
+</html>
