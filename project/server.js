@@ -50,9 +50,11 @@ app.post('/login',function(req,res) {
 		    users[i].password == req.body.password) {
 			req.session.authenticated = true;
 			req.session.username = users[i].name;
+		res.redirect('/read');
+		res.end();
 		}
 	}
-	res.redirect('/read');
+	
 });
 
 
