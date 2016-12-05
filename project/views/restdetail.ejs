@@ -2,11 +2,14 @@
   <head>
     <title>Google Map Example</title>
     <link rel="stylesheet" type="text/css" href="layout.css">
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp
-        &key=AIzaSyBN_haQLBRW33ZZsWhui4-ZylMN0mv9plU"></script>
+    <script 
+	type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3&key=AIzaSyBN_haQLBRW33ZZsWhui4-ZylMN0mv9plU"></script>
+
     <script type="text/javascript">
+	 console.log('Google Maps API version: ' + google.maps.version);
+
       var loadMap = function(){
-        var myLatLng = new google.maps.LatLng({lat: <%= coordX %>, lng: <%= coordY %>});
+        var myLatLng = new google.maps.LatLng({lat: <%= coordY %>, lng: <%= coordX %>});
         var map = new google.maps.Map(document.getElementById("map"),{
           zoom: 18, center: myLatLng
         }); 

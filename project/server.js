@@ -4,6 +4,7 @@ var bodyParser = require('body-parser');
 var app = express();
 var MongoClient = require('mongodb').MongoClient;
 var ObjectId = require('mongodb').ObjectID;
+//var cfenv = require('cfenv');
 var fileUpload = require('express-fileupload');
 var assert = require('assert');
 var mongourl = 'mongodb://admin:admin@ds115798.mlab.com:15798/restaurant';
@@ -13,8 +14,8 @@ var o_id=null;
 var deletedoc=false;
 var rates = [{}];
 var users = new Array(
-	{name: 'demo', password: ''},
-	{name: 'guest', password: 'guest'}
+	{name: 'student', password: ''},
+	{name: 'demo', password: ''}
 );
 
 
@@ -52,8 +53,12 @@ app.post('/login',function(req,res) {
 			req.session.username = users[i].name;
 		res.redirect('/read');
 		res.end();
-		}
+		}else{
+		res.sendFile(__dirname + '/public/login.html');
+	}		
 	}
+		
+
 	
 });
 
@@ -381,8 +386,63 @@ app.get('/api/read/name/:name',function(req,res){
 });
 });
 
-app.get('/api/create',function(req,res){
-	res.sendFile(__dirname + '/public/form.html');	
+
+app.get('/api/read/name/:borough',function(req,res){
+	 MongoClient.connect(mongourl,function(err,db){
+	var name = req.params.borough;
+	var result = null;
+	if (name != null) {
+      db.collection('restaurant').findOne({"borough" : name}, function(err, doc){
+      assert.equal(err, null); 
+	result = JSON.stringify(doc);
+	res.end(result);
+	//console.log("JSON.stringify(doc):"+ result);
+	});
+	}
+	db.close();
+});
+});
+
+
+app.get('/api/read/name/:cuisine',function(req,res){
+	 MongoClient.connect(mongourl,function(err,db){
+	var name = req.params.cuisine;
+	var result = null;
+	if (name != null) {
+      db.collection('restaurant').findOne({"cuisine" : name}, function(err, doc){
+      assert.equal(err, null); 
+	result = JSON.stringify(doc);
+	res.end(result);
+	//console.log("JSON.stringify(doc):"+ result);
+	});
+	}
+	db.close();
+});
+});
+
+app.post('/api/create',function(req,res){
+	var rate = null;
+	var sampleFile=null;
+ 
+    MongoClient.connect(mongourl,function(err,db) {
+      console.log('Connected to db');
+      assert.equal(null,err);
+      create(db,req.body.name,req.body.borough,req.body.cuisine,req.body.street,req.body.building,req.body.zipcode,req.body.gpslon,req.body.gpslat,
+sampleFile,rate,req.body.username, function(result) {
+        db.close();
+        if (result != null) {
+  
+	  res.write("status:ok");
+	  res.write("name:"+req.body.name);
+	  res.write("user:"+req.body.username);
+	  res.end();	
+          //res.end('Inserted: ' + result.insertedId)
+        } else {
+          res.status(500);
+          res.end(JSON.stringify(result));
+        }
+      });
+    });	
 });
 
 app.get('/',function(req,res){
@@ -394,7 +454,10 @@ app.get('/logout',function(req,res) {
 	req.session = null;
 	res.redirect('/');
 });
+/*var appEnv = cfenv.getAppEnv();
+app.listen(appEnv.port, '0.0.0.0', function() {
 
+});*/
 app.listen(process.env.PORT || 8099);
 
 
