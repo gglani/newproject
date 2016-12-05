@@ -387,12 +387,12 @@ app.get('/api/read/name/:name',function(req,res){
 });
 
 
-app.get('/api/read/name/:borough',function(req,res){
+app.get('/api/read/borough/:borough',function(req,res){
 	 MongoClient.connect(mongourl,function(err,db){
-	var name = req.params.borough;
+	var borough = req.params.borough;
 	var result = null;
-	if (name != null) {
-      db.collection('restaurant').findOne({"borough" : name}, function(err, doc){
+	if (borough != null) {
+      db.collection('restaurant').findOne({"borough" : borough}, function(err, doc){
       assert.equal(err, null); 
 	result = JSON.stringify(doc);
 	res.end(result);
@@ -404,12 +404,12 @@ app.get('/api/read/name/:borough',function(req,res){
 });
 
 
-app.get('/api/read/name/:cuisine',function(req,res){
+app.get('/api/read/cuisine/:cuisine',function(req,res){
 	 MongoClient.connect(mongourl,function(err,db){
-	var name = req.params.cuisine;
+	var cuisine = req.params.cuisine;
 	var result = null;
-	if (name != null) {
-      db.collection('restaurant').findOne({"cuisine" : name}, function(err, doc){
+	if (cuisine != null) {
+      db.collection('restaurant').findOne({"cuisine" : cuisine}, function(err, doc){
       assert.equal(err, null); 
 	result = JSON.stringify(doc);
 	res.end(result);
@@ -438,8 +438,8 @@ sampleFile,rate,req.body.username, function(result) {
 	  res.end();	
           //res.end('Inserted: ' + result.insertedId)
         } else {
-          res.status(500);
-          res.end(JSON.stringify(result));
+         
+          res.end("status:failed");
         }
       });
     });	
